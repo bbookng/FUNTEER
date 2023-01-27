@@ -2,7 +2,6 @@ package com.yam.funteer.pay.entity;
 
 import java.time.LocalDateTime;
 
-import javax.naming.Name;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
