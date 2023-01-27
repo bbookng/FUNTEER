@@ -7,12 +7,7 @@ import { increment, decrement } from './store/slices/counterSlice';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 
 function App() {
-  return (
-    /**
-     * path: 이동할 경로, element: 렌더링할 페이지
-     */
-    <div></div>
-  );
+  return <div>123</div>;
 }
 
 export default App;

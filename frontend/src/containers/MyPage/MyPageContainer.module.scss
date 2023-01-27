@@ -13,14 +13,14 @@
     & .contentBox {
       display: flex;
       margin: 0 auto;
-      width: 500px;
-      height: 500px;
+      width: 50%;
+      height: auto;
       background-color: black;
       text-align: center;
       color: white;
       align-items: center;
       justify-content: center;
-      font-size: 150px;
+      font-size: 80px;
     }
     @media (max-width: 900px) {
       margin-left: 0;
