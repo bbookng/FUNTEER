@@ -1,19 +1,145 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
+/*  */
+import UserRoot from './roots/UserRoot';
+import AdminRoot from './roots/AdminRoot';
+import {
+  MainPage,
+  SignUp,
+  MemberSignUp,
+  TeamSignUp,
+  FindPassword,
+  Login,
+  TeamPage,
+  ServiceDetail,
+  FindEmail,
+  ResetPassword,
+  Charge,
+  Donation,
+  ErrorPage,
+  MyBadges,
+  EditProfile,
+  MyDonates,
+  MyFavors,
+  MyFollows,
+  MyFunding,
+  MyFunteerDonate,
+  MyPage,
+} from './pages/index';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <UserRoot />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />,
+      },
+      /* Accounts Routes */
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'findEmail',
+        element: <FindEmail />,
+      },
+      {
+        path: 'findPassword',
+        element: <FindPassword />,
+      },
+      {
+        path: 'resetPassword',
+        element: <ResetPassword />,
+      },
+      {
+        path: 'signup',
+        element: <SignUp />,
+        children: [
+          {
+            path: 'teamSignUp',
+            element: <TeamSignUp />,
+          },
+          {
+            path: 'MemberSignUp',
+            element: <MemberSignUp />,
+          },
+        ],
+      },
+      /* Add-on Routes */
+      {
+        path: 'donation',
+        element: <Donation />,
+      },
+      {
+        path: 'charge',
+        element: <Charge />,
+      },
+      /* Service Routes */
+      {
+        path: 'service',
+        element: <ServiceDetail />,
+      },
+      {
+        path: 'team',
+        element: <TeamPage />,
+      },
+      /* MyPage Routes */
+      {
+        path: 'myPage',
+        element: <MyPage />,
+      },
+      {
+        path: 'editProfile',
+        element: <EditProfile />,
+      },
+      {
+        path: 'myFunding',
+        element: <MyFunding />,
+      },
+      {
+        path: 'myFunteerDonate',
+        element: <MyFunteerDonate />,
+      },
+      {
+        path: 'myDonates',
+        element: <MyDonates />,
+      },
+      {
+        path: 'myBadges',
+        element: <MyBadges />,
+      },
+      {
+        path: 'myFavors',
+        element: <MyFavors />,
+      },
+      {
+        path: 'myFollow',
+        element: <MyFollows />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminRoot />,
+    errorElement: <ErrorPage />,
+    children: [],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,
 );
