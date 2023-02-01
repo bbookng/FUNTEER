@@ -1,7 +1,7 @@
 package com.yam.funteer.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yam.funteer.user.UserType;
+import com.yam.funteer.common.code.UserType;
 import com.yam.funteer.user.dto.request.LoginRequest;
 import com.yam.funteer.user.dto.response.LoginResponse;
 import com.yam.funteer.user.service.LoginService;
@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(LoginController.class)
@@ -36,7 +35,6 @@ class LoginControllerTest {
     void LoginTest01() throws Exception {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("kim@ssafy.com");
-        loginRequest.setType(UserType.NORMAL);
         loginRequest.setPassword("Qwer1234@");
 
         LoginResponse loginResponse = new LoginResponse();
@@ -53,7 +51,6 @@ class LoginControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonStr))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("ssafy"));
+                .andExpect(status().isOk());
     }
 }

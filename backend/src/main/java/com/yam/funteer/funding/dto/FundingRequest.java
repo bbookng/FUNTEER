@@ -1,12 +1,6 @@
 package com.yam.funteer.funding.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
-
-import com.yam.funteer.attach.entity.Attach;
-import com.yam.funteer.funding.entity.TargetMoney;
 import com.yam.funteer.user.entity.Team;
 
 import lombok.AllArgsConstructor;
@@ -21,18 +15,22 @@ import lombok.NoArgsConstructor;
 public class FundingRequest {
 
 	@NotNull
-	private Team team;
+	private Long categoryId;
 
 	@NotNull
 	private String title;
 	@NotNull
 	private String content;
 	@NotNull
-	private LocalDateTime startDate;
+	private String  startDate;
 	@NotNull
-	private LocalDateTime endDate;
-	private LocalDateTime postDate;
-	private Attach thumbnail;
+	private String endDate;
+
+	@NotNull
+	private String fundingDescription;
+
+	// @NotNull
+	// private MultipartFile thumbnail;
 
 	@NotNull
 	private int amount1;
