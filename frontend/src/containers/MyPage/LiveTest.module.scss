@@ -9,8 +9,13 @@
   justify-content: center;
   & .contentBox {
     margin-top: 80px;
-    width: 80%;
-    height: 70%;
+    width: 1160px;
+    height: 100%;
     background-color: rgb(61, 61, 61);
+    color: white;
+    font-size: 200px;
+    & .videoComp {
+      width: 500px !important;
+    }
   }
 }
