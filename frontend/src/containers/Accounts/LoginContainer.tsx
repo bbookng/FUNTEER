@@ -45,7 +45,7 @@ function LoginContainer() {
       const response = await requestSignIn(userInfo);
       if (response.status === 200) {
         const { data } = response;
-        console.log(data)
+        console.log(data);
 
         localStorage.setItem('accessToken', data.token.accessToken);
         localStorage.setItem('refreshToken', data.token.refreshToken);
@@ -110,20 +110,19 @@ function LoginContainer() {
               <img src={KakaoLogin} alt="aaa" onClick={OAuth} aria-hidden="true" />
             </div>
           </div>
-
-          <ul className={styles.circles}>
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-            <li />
-          </ul>
         </div>
+        <ul className={styles.circles}>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
       </div>
     </div>
   );
