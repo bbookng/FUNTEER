@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "typeRoots": ["./@types","./node_modules/@types"],
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext", "scripthost"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,6 +16,29 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    // "allowJs": true,
+    // "allowSyntheticDefaultImports": true,
+    "emitBOM": false,
+    // "forceConsistentCasingInFileNames": true,
+    // "lib": ["dom", "es2015.promise", "es5", "scripthost"],
+    // "module": "commonjs",
+    // "noFallthroughCasesInSwitch": true,
+    //"noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    //"noUnusedLocals": true,
+    //"noUnusedParameters": true,
+    "outDir": "../../lib",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "rootDir": "./src",
+    "skipDefaultLibCheck": true,
+    // "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "suppressExcessPropertyErrors": true,
+    "suppressImplicitAnyIndexErrors": true
+    // "target": "es5"
   },
   "include": ["src"]
 }
