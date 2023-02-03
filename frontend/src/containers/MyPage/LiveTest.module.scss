@@ -14,5 +14,8 @@
     background-color: rgb(61, 61, 61);
     color: white;
     font-size: 200px;
+    & .videoComp {
+      width: 500px !important;
+    }
   }
 }

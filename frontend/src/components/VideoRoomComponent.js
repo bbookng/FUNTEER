@@ -21,6 +21,7 @@ class VideoRoomComponent extends Component {
     this.layout = new OpenViduLayout();
     let sessionName = this.props.sessionName ? this.props.sessionName : 'SessionA';
     let userName = this.props.user ? this.props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
+    let hostSessionId = 'con_NkuCAKFL41';
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
@@ -526,8 +527,9 @@ class VideoRoomComponent extends Component {
           )} */}
           {this.state.subscribers.map((sub, i) => (
             <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-              <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-              {console.log('Connection 아이디:', i, '번째', sub.streamManager.stream.streamId)}
+              {sub.streamManager.stream.streamId === ownerSessionId ? <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} /> : null};
+              {console.log('subscriber streamId: ', sub.streamManager.stream.streamId)}
+              {/* {console.log('subscriber: ', sub)} */}
             </div>
           ))}
           {localUser !== undefined && localUser.getStreamManager() !== undefined && (
