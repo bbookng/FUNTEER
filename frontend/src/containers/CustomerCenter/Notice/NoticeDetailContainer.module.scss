@@ -1,0 +1,138 @@
+@import '../../../styles/reset.scss';
+@import '../../../styles/variable.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: NanumSquare !important;
+
+  .contents {
+    margin-top: 77.6px;
+    max-width: 900px;
+    min-height: 100vh;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 5rem;
+    background-color: #fcfcfc;
+
+    .title {
+      margin: 5rem 0 1.5rem 0;
+      font-weight: bold;
+      font-size: 2rem;
+      color: rgba(0, 0, 0, 0.8);
+
+      @include tablet {
+        font-size: 1.5rem;
+        margin: 8rem 0 1rem 0;
+      }
+
+      @include mobile {
+        font-size: 1.5rem;
+        margin: 5rem 0 0.5rem 0;
+      }
+    }
+
+    .post-date {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 1.25rem;
+      font-family: NanumSquareRound;
+
+      @include tablet {
+        font-size: 1.125rem;
+      }
+
+      @include mobile {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    & hr {
+      width: 85%;
+      margin: 2rem 0;
+      opacity: 0.2;
+
+      @include tablet {
+        margin: 1.5rem 0;
+      }
+
+      @include mobile {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+    }
+
+    .content {
+      width: 80%;
+      padding: 1rem 0.5rem;
+
+      @include mobile {
+        width: 95%;
+        padding: 0;
+      }
+    }
+
+    .file {
+      display: flex;
+      text-align: center;
+      height: 1.5rem;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 0.9rem;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .back {
+      margin: 3rem auto 5rem 0;
+      background-color: inherit;
+      border: none;
+      color: $primary;
+      font-size: 1.25rem;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        color: $second;
+      }
+
+      @include tablet {
+        font-size: 1.125rem;
+      }
+
+      @include mobile {
+        display: 0.75rem;
+      }
+    }
+
+    .edit {
+      margin: 3rem auto 5rem 2rem;
+      background-color: inherit;
+      border: none;
+      color: $error;
+      font-size: 1.25rem;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        color: $second;
+      }
+
+      @include tablet {
+        font-size: 1.125rem;
+      }
+
+      @include mobile {
+        display: 0.75rem;
+      }
+    }
+  }
+}

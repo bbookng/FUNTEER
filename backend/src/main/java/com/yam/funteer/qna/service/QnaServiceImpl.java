@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,18 +49,18 @@ public class QnaServiceImpl implements QnaService {
 	private final AlarmService alarmService;
 
 	@Override
-	public List<QnaListRes> qnaGetList() {
+	public List<QnaListRes> qnaGetList(int page,int size) {
 		User user=userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(()->new UserNotFoundException());
 		List<QnaListRes>list;
-
+		PageRequest pageRequest=PageRequest.of(page,size);
 		if(user.getUserType().equals(UserType.ADMIN)){
-			List<Qna>qnaList=qnaRepository.findAll();
+			List<Qna>qnaList=qnaRepository.findAllByOrderByQnaIdDesc(pageRequest);
 			list=qnaList.stream().map(qna->new QnaListRes(qna)).collect(Collectors.toList());
 
 			return list;
 		}
 
-		List<Qna>qnaList=qnaRepository.findAllByUser(user);
+		List<Qna>qnaList=qnaRepository.findAllByUserOrderByQnaIdDesc(user,pageRequest);
 		list=qnaList.stream().map(qna->new QnaListRes(qna)).collect(Collectors.toList());
 
 		return list;
@@ -86,14 +87,15 @@ public class QnaServiceImpl implements QnaService {
 			}
 		}
 		List<User> adminList = userRepository.findAllByUserType(UserType.ADMIN);
-		alarmService.sendList(adminList,qna.getTitle(), "QnA가 등록되었습니다.", qna);
+		List<String>adminEmailList=adminList.stream().map(User::getEmail).collect(Collectors.toList());
+		alarmService.sendList(adminEmailList,qna.getTitle()+", QnA가 등록되었습니다.", "/qna/"+qna.getId());
 		return new QnaBaseRes(qna,attachList);
 	}
 
 
 	@Override
 	public QnaBaseRes qnaGetDetail(Long qnaId) {
-		Qna qna = qnaRepository.findById(qnaId).orElseThrow(() -> new QnaNotFoundException());
+		Qna qna = qnaRepository.findByQnaId(qnaId).orElseThrow(() -> new QnaNotFoundException());
 		User user=userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(()->new UserNotFoundException());
 		if (qna.getUser().getId()==user.getId()||user.getUserType().equals(UserType.ADMIN)) {
 			List<PostAttach>postAttachList=postAttachRepository.findAllByPost(qna);
@@ -110,14 +112,14 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public QnaBaseRes qnaModify(Long qnaId, QnaRegisterReq qnaRegisterReq){
-		Qna qna = qnaRepository.findById(qnaId).orElseThrow(() -> new QnaNotFoundException());
+		Qna qna = qnaRepository.findByQnaId(qnaId).orElseThrow(() -> new QnaNotFoundException());
 		User user=userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(()->new UserNotFoundException());
 		List<String>attachList=new ArrayList<>();
 		if(user.getId()==qna.getUser().getId()) {
-			qnaRepository.save(qnaRegisterReq.toEntity(user,qnaId));
+			qnaRepository.save(qnaRegisterReq.toEntity(user,qna.getId(),qnaId));
 			List<PostAttach>postAttachList=postAttachRepository.findAllByPost(qna);
 			for(PostAttach postAttach:postAttachList){
-				awsS3Uploader.delete("qna",postAttach.getAttach().getPath());
+				awsS3Uploader.delete("qna/",postAttach.getAttach().getPath());
 				postAttachRepository.deleteById(postAttach.getId());
 				attachRepository.deleteById(postAttach.getAttach().getId());
 			}
@@ -144,20 +146,21 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void qnaDelete(Long postId){
-		Qna qna = qnaRepository.findById(postId).orElseThrow(() -> new QnaNotFoundException());
+	public void qnaDelete(Long qnaId){
+		Qna qna = qnaRepository.findByQnaId(qnaId).orElseThrow(() -> new QnaNotFoundException());
 		User user=userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(()->new UserNotFoundException());
 		if(qna.getUser().getId()==user.getId()) {
 			List<PostAttach>postAttachList=postAttachRepository.findAllByPost(qna);
 			for(PostAttach postAttach:postAttachList){
-				awsS3Uploader.delete("qna",postAttach.getAttach().getPath());
+				awsS3Uploader.delete("qna/",postAttach.getAttach().getPath());
 				postAttachRepository.deleteById(postAttach.getId());
 				attachRepository.deleteById(postAttach.getAttach().getId());
 			}
 
 			qnaRepository.delete(qna);
-			Reply reply=replyRepository.findByQna(qna).orElseThrow(()->new ReplyNotFoundException());
-			replyRepository.delete(reply);
+			if(replyRepository.findByQna(qna).isPresent()){
+				replyRepository.delete(replyRepository.findByQna(qna).orElseThrow(ReplyNotFoundException::new));
+			}
 
 		}
 		else throw new IllegalArgumentException("접근권한이 없습니다.");

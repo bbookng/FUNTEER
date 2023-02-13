@@ -8,15 +8,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import { ConfirmModalType } from '../../types/modal';
+import { useAppDispatch } from '../../store/hooks';
+import { closeModal } from '../../store/slices/modalSlice';
 
 function ConfirmModal({ isOpen, title, content, handleModal }: ConfirmModalType) {
   const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const onClickHandler = () => {
+    dispatch(closeModal());
     setOpen(false);
     handleModal();
   };
 
   const onCloseModal = () => {
+    dispatch(closeModal());
     setOpen(false);
     handleModal();
   };
@@ -32,7 +37,7 @@ function ConfirmModal({ isOpen, title, content, handleModal }: ConfirmModalType)
         <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={onClickHandler}>
+        <Button color="warning" variant="contained" onClick={onClickHandler}>
           닫기
         </Button>
       </DialogActions>

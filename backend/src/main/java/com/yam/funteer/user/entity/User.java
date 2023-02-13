@@ -24,6 +24,7 @@ import com.sun.istack.NotNull;
 import com.yam.funteer.attach.entity.Attach;
 import com.yam.funteer.common.code.UserType;
 
+import io.openvidu.java.client.OpenViduRole;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,6 +48,8 @@ public class User {
 	private @NotNull String email;
 	private String password;
 	private @NotNull String name;
+
+	@Column(unique = true)
 	private String phone;
 	@OneToOne
 	@JoinColumn(name = "profile_id")
@@ -56,11 +59,12 @@ public class User {
 	@Enumerated(value = EnumType.STRING)
 	@Column(nullable = false)
 	private UserType userType;
+	private Long totalPayAmount;
 
 	public Optional<Attach> getProfileImg(){
 		return Optional.ofNullable(this.profileImg);
 	}
-	protected void updateProfile(Attach profileImg){
+	public void updateProfile(Attach profileImg){
 		this.profileImg = profileImg;
 	}
 	public void charge(Long amount) {
@@ -69,7 +73,7 @@ public class User {
 	public void changePassword(String password){
 		this.password = password;
 	}
-	public void signOut(UserType userType){
+	protected void signOut(UserType userType){
 		this.userType = userType;
 	}
 	public void validate(){
@@ -89,4 +93,11 @@ public class User {
 		this.money = amount;
 	}
 
+	protected void teamAccept() {
+		this.userType = UserType.TEAM;
+	}
+
+	protected void expire() {
+		this.userType = UserType.TEAM_EXPIRED;
+	}
 }

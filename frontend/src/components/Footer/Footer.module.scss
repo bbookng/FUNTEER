@@ -1,0 +1,70 @@
+@import '../../styles/reset.scss';
+@import '../../styles/variable.scss';
+
+.footer {
+  bottom: 0px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: inherit;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: 'NanumSquare' !important;
+
+  .contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1440px;
+    padding-top: 2rem;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+
+      @include mobile {
+      }
+
+      & h1 {
+        font-size: 2.25rem;
+        font-weight: bold;
+        margin: 0 0 2rem 0;
+
+        @include mobile {
+          margin: 1rem 0 2rem 0;
+        }
+      }
+
+      & nav {
+        margin-bottom: 2rem;
+        & a {
+          margin-right: 1rem;
+          text-decoration: none;
+        }
+      }
+
+      & p {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .right {
+      & p {
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+}
