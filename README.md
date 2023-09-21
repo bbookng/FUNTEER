@@ -26,30 +26,6 @@
 1. 개발 기간 : 2023.01.09 ~ 2023.02.17 (총 6주)
 2. 인원 (총 6인)
 
-<table>
-  <tr>
-   <td align="center"><a href="https://github.com/bbookng"><img src="https://avatars.githubusercontent.com/u/109321163?v=4" width="100px;" alt=""/>
-   <br /><sub><b>bbookng</b><br></sub></a>
-    <sub><b>팀장, BE</b><br></sub></td>
-   <td align="center"><a href="https://github.com/dhyunee"><img src="https://avatars.githubusercontent.com/u/101089655?v=4" width="100px;" alt=""/>
-   <br /><sub><b>dhyunee</b><br></sub></a>
-   <sub><b>BE</b><br></sub></td>
-   <td align="center"><a href="https://github.com/ddings7303"><img src="https://avatars.githubusercontent.com/u/76030391?v=4" width="100px;" alt=""/>
-   <br /><sub><b>ddings73</b><br></sub></a>
-    <sub><b>BE</b><br></sub></td>
-   <td align="center"><a href="https://github.com/bangbongbim"><img src="https://avatars.githubusercontent.com/u/37106496?v=4" width="100px;" alt=""/>
-   <br /><sub><b>bangbongbim</b><br></sub></a>
-   <sub><b>FE</b><br></sub></td>
-   <td align="center"><a href="https://github.com/sub9707"><img src="https://avatars.githubusercontent.com/u/110171787?v=4" width="100px;" alt=""/>
-   <br /><sub><b>김승섭</b><br></sub></a>
-       <sub><b>FE</b><br></sub></td>
-   <td align="center"><a href="https://github.com/becoding96"><img src="https://avatars.githubusercontent.com/u/88614621?v=4" width="100px;" alt=""/>
-   <br /><sub><b>becoding96</b><br></sub></a>
-      <sub><b>FE</b><br></sub></td>
-  </tr>
-</table>
-
-
 <br>
 
 ### 📌 개요
